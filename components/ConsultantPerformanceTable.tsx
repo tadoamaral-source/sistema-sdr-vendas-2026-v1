@@ -74,32 +74,32 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
     return (
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-collapse">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
+                <thead className="text-xs text-white uppercase">
+                    <tr className="bg-slate-800 dark:bg-slate-900">
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600">Consultor</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Metas SDR</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Meta Leads</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">% Qtd Lead Atingido</th>
-                        <th colSpan={4} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300 dark:bg-yellow-800">Fontes</th>
+                        <th colSpan={4} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Fontes</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Leads Agendados por Dia</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Meta Mago</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Realizado Mago</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Contratos</th>
-                        <th colSpan={3} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center bg-blue-300 dark:bg-blue-800">Não Recorrente</th>
-                        <th colSpan={3} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center bg-green-300 dark:bg-green-800">MRR</th>
+                        <th colSpan={3} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Não Recorrente</th>
+                        <th colSpan={3} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">MRR</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Ações</th>
                     </tr>
-                    <tr className="bg-gray-100 dark:bg-gray-600">
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Inbound</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Outbound</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Lead Parceiro</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">IA Leads</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Meta Financeira N.R</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Vendido N.R</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Resultado Financeiro</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-green-300/50 dark:bg-green-800/50">Meta Financeira MRR</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-green-300/50 dark:bg-green-800/50">Vendido MRR</th>
-                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-green-300/50 dark:bg-green-800/50">Resultado Financeiro MRR</th>
+                    <tr className="bg-slate-700 dark:bg-slate-800">
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Inbound</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Outbound</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Lead Parceiro</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">IA Leads</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Meta Financeira N.R</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Vendido N.R</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Resultado Financeiro</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Meta Financeira MRR</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Vendido MRR</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">Resultado Financeiro MRR</th>
                     </tr>
                 </thead>
                 <tbody>
