@@ -23,6 +23,7 @@ export interface ConsultantData {
     inboundLeads: number;
     outboundLeads: number;
     partnerLeads: number;
+    iaLeads: number;
     magoGoal: number;
     magoAchieved: number;
     financialGoalNR: number;

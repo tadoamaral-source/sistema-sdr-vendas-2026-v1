@@ -27,7 +27,7 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
             const consultantData = monthlyData.consultants.find(c => c.salespersonId === sp.id);
             if (!consultantData) return null;
 
-            const receivedLeads = consultantData.inboundLeads + consultantData.outboundLeads + consultantData.partnerLeads;
+            const receivedLeads = consultantData.inboundLeads + consultantData.outboundLeads + consultantData.partnerLeads + consultantData.iaLeads;
             const leadGoalAchieved = consultantData.leadGoal > 0 ? receivedLeads / consultantData.leadGoal : 0;
             const scheduledPerDay = monthlyData.workingDays > 0 ? receivedLeads / monthlyData.workingDays : 0;
             const resultNR = consultantData.nrSales - consultantData.financialGoalNR;
@@ -53,6 +53,7 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
             inboundLeads: data.reduce((sum, d) => sum + d.inboundLeads, 0),
             outboundLeads: data.reduce((sum, d) => sum + d.outboundLeads, 0),
             partnerLeads: data.reduce((sum, d) => sum + d.partnerLeads, 0),
+            iaLeads: data.reduce((sum, d) => sum + d.iaLeads, 0),
             magoGoal: data.reduce((sum, d) => sum + d.magoGoal, 0),
             magoAchieved: data.reduce((sum, d) => sum + d.magoAchieved, 0),
             contractsSigned: data.reduce((sum, d) => sum + d.contractsSigned, 0),
@@ -77,10 +78,9 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
                     <tr>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600">Consultor</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Metas SDR</th>
-                        <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Quantidade</th>
-                        <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Qtd Lead Recebido</th>
-                        <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 min-w-40">% Qtd Lead Atingido</th>
-                        <th colSpan={3} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300 dark:bg-yellow-800">Fontes</th>
+                        <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Meta Leads</th>
+                        <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">% Qtd Lead Atingido</th>
+                        <th colSpan={4} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300 dark:bg-yellow-800">Fontes</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Leads Agendados por Dia</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Meta Mago</th>
                         <th rowSpan={2} className="px-2 py-3 border border-gray-300 dark:border-gray-600 text-center">Realizado Mago</th>
@@ -93,6 +93,7 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Inbound</th>
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Outbound</th>
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">Lead Parceiro</th>
+                        <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-yellow-300/50 dark:bg-yellow-800/50">IA Leads</th>
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Meta Financeira N.R</th>
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Vendido N.R</th>
                         <th className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center bg-blue-300/50 dark:bg-blue-800/50">Resultado Financeiro</th>
@@ -107,11 +108,11 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 font-medium"><EditableTextCell value={row.name} onSave={(name) => onUpdateSalespersonName(row.id, name)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.sdrGoal} onSave={(v) => onUpdateConsultant(row.id, 'sdrGoal', v)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.leadGoal} onSave={(v) => onUpdateConsultant(row.id, 'leadGoal', v)} isLocked={monthlyData.isClosed} /></td>
-                            <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center font-semibold">{row.receivedLeads}</td>
-                            <td className="px-2 py-2 border border-gray-300 dark:border-gray-600"><ProgressBar value={row.leadGoalAchieved} /></td>
+                            <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 min-w-40"><ProgressBar value={row.leadGoalAchieved} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.inboundLeads} onSave={(v) => onUpdateConsultant(row.id, 'inboundLeads', v)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.outboundLeads} onSave={(v) => onUpdateConsultant(row.id, 'outboundLeads', v)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.partnerLeads} onSave={(v) => onUpdateConsultant(row.id, 'partnerLeads', v)} isLocked={monthlyData.isClosed} /></td>
+                            <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.iaLeads} onSave={(v) => onUpdateConsultant(row.id, 'iaLeads', v)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center font-semibold">{row.scheduledPerDay.toFixed(2)}</td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.magoGoal} onSave={(v) => onUpdateConsultant(row.id, 'magoGoal', v)} isLocked={monthlyData.isClosed} /></td>
                             <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center"><EditableCell value={row.magoAchieved} onSave={(v) => onUpdateConsultant(row.id, 'magoAchieved', v)} isLocked={monthlyData.isClosed} /></td>
@@ -137,11 +138,11 @@ const ConsultantPerformanceTable: React.FC<ConsultantPerformanceTableProps> = ({
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600">TOTAIS</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.sdrGoal}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.leadGoal}</td>
-                        <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.receivedLeads}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600"><ProgressBar value={totals.totalLeadGoalAchieved} /></td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.inboundLeads}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.outboundLeads}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.partnerLeads}</td>
+                        <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.iaLeads}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.totalScheduledPerDay.toFixed(2)}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.magoGoal}</td>
                         <td className="px-2 py-2 border border-gray-300 dark:border-gray-600 text-center">{totals.magoAchieved}</td>

@@ -23,7 +23,8 @@ const createDefaultState = () => {
     const initialConsultantData = initialSalespersons.map(sp => ({
         salespersonId: sp.id, sdrGoal: 10, leadGoal: 15,
         inboundLeads: Math.floor(Math.random() * 10), outboundLeads: Math.floor(Math.random() * 5),
-        partnerLeads: Math.floor(Math.random() * 3), magoGoal: 3, magoAchieved: Math.floor(Math.random() * 4),
+        partnerLeads: Math.floor(Math.random() * 3), iaLeads: Math.floor(Math.random() * 4),
+        magoGoal: 3, magoAchieved: Math.floor(Math.random() * 4),
         financialGoalNR: 22200, nrSales: Math.random() * 15000,
         financialGoalMRR: 2800, mrrSales: Math.random() * 2000, contractsSigned: Math.floor(Math.random() * 5) + 1,
     }));
@@ -60,7 +61,7 @@ const App: React.FC = () => {
             year: selectedDate.getFullYear(), month: selectedDate.getMonth(), workingDays: 21,
             sdrInProduction: 2, sdrInPreparation: 2, nrGoal: 216800, mrrGoal: 18800, managerialGoal: 195120,
             consultants: salespersonList.map(sp => ({
-                salespersonId: sp.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0,
+                salespersonId: sp.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0, iaLeads: 0,
                 magoGoal: 0, magoAchieved: 0, financialGoalNR: 0, nrSales: 0, financialGoalMRR: 0, mrrSales: 0, contractsSigned: 0,
             })), isClosed: false,
         };
@@ -74,7 +75,7 @@ const App: React.FC = () => {
                     year: newDate.getFullYear(), month: newDate.getMonth(), workingDays: 21,
                     sdrInProduction: 2, sdrInPreparation: 2, nrGoal: 216800, mrrGoal: 18800, managerialGoal: 195120,
                     consultants: salespersonList.map(sp => ({
-                        salespersonId: sp.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0,
+                        salespersonId: sp.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0, iaLeads: 0,
                         magoGoal: 0, magoAchieved: 0, financialGoalNR: 0, nrSales: 0, financialGoalMRR: 0, mrrSales: 0, contractsSigned: 0,
                     })), isClosed: false,
                 }
@@ -111,7 +112,7 @@ const App: React.FC = () => {
             for (const key in newAllData) {
                 if (newAllData[key].consultants.every(c => c.salespersonId !== newSalesperson.id)) {
                     newAllData[key].consultants.push({
-                        salespersonId: newSalesperson.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0,
+                        salespersonId: newSalesperson.id, sdrGoal: 0, leadGoal: 0, inboundLeads: 0, outboundLeads: 0, partnerLeads: 0, iaLeads: 0,
                         magoGoal: 0, magoAchieved: 0, financialGoalNR: 0, nrSales: 0, financialGoalMRR: 0, mrrSales: 0, contractsSigned: 0,
                     });
                 }
